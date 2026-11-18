@@ -5,6 +5,9 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   base: '/BuyWise-AI/',
   plugins: [react()],
+  build: {
+    outDir: 'dist',
+  },
   server: {
     port: 3000,
     open: true,
