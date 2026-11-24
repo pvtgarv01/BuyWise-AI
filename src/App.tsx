@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ToastProvider } from './context/ToastContext';
+import { AuthProvider } from './context/AuthContext';
 import { WishlistProvider } from './context/WishlistContext';
 import { CompareProvider } from './context/CompareContext';
 import { ToastContainer } from './components/common/Toast';
@@ -14,6 +15,7 @@ import { WishlistPage } from './components/wishlist/WishlistPage';
 import { ComparePage } from './components/compare/ComparePage';
 import { AIAssistantPage } from './components/ai/AIAssistantPage';
 import { ProductDetailModal } from './components/products/ProductDetailModal';
+import { AuthModal } from './components/auth/AuthModal';
 import { Product, ProductCategory } from './types/product';
 
 export const AppContent: React.FC = () => {
@@ -172,6 +174,9 @@ export const AppContent: React.FC = () => {
       {/* Global Toast Container */}
       <ToastContainer />
 
+      {/* Firebase Authentication Modal */}
+      <AuthModal />
+
       {/* Footer */}
       <Footer
         onSelectCategory={handleSelectCategory}
@@ -187,11 +192,13 @@ export const AppContent: React.FC = () => {
 export const App: React.FC = () => {
   return (
     <ToastProvider>
-      <WishlistProvider>
-        <CompareProvider>
-          <AppContent />
-        </CompareProvider>
-      </WishlistProvider>
+      <AuthProvider>
+        <WishlistProvider>
+          <CompareProvider>
+            <AppContent />
+          </CompareProvider>
+        </WishlistProvider>
+      </AuthProvider>
     </ToastProvider>
   );
 };
